@@ -1,0 +1,94 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+interface fitur{
+   
+    + tampilKetersediaan(nama :String):void
+    + setKetersediaan(int hari,boolean tersedia) : void
+    + cekKetersediaan(int hari):boolean
+
+
+}
+abstract class hotel{
+    # namaHotel :String
+    #lokasi :String
+    # harga :double
+    # tamu:pengunjungHotel[]
+    # ketersediaanKamar : boolean[]
+    #String hari = {"Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu"}
+    <<constructor>> hotel(namaHotel :String,lokasi :String,harga : double)
+    getNamaHotel() :String
+    getLokasi()    :String
+    getHarga()     :double
+    getKetersediaanKamar():boolean[]
+    getHari() : String[]
+    + tampilKetersediaan():void
+    + setKetersediaan(int hari,boolean tersedia) : void
+    + cekKetersediaan(int hari):boolean
+    +pengunjungHotel[]getTammu() 
+    +setTamu(pengunjungHotel[]tamu)
+    abstract inisiasiKetersediaan() : void
+
+
+
+}
+class aplikasiPemesanHotel{
+    + List<<hotel>> daftarHotel
+    <<constructor>> aplikasiPemesananHotel()
+    +tambahHotel(hotel : hotel) :void
+    +tampilKetersediaan() :void
+    +Liat<hotel>getDaftarHotel()
+    +pesanKamar(String nama,String hari) :void
+    +tampikKetersediaanKamar(String nama) : void
+    -getIndexHari(hari :String) : int
+
+
+}
+
+class kamarDeluxe{
+    -termasukSarapan : boolean
+    -termasukWifi :boolean
+    <<constructor>> kamarDeluxe(nama :String,lokasi :String,harga :double termasukSarapan :boolean,termasukWifi :boolean)
+    + inisiasiKetersediaan() : void
+    + tampilKetersediaan()   :void
+
+
+}
+class kamarVip{
+    - fasilitas :String[]
+    <<constructor>> kamarDeluxe(nama :String,lokasi :String,harga :double,fasilitas :String[])
+    + inisiasiKetersediaan() : void
+    + tampilKetersediaan()   :void
+
+
+}
+class kamarSuperior{
+    - termasukWifi : boolean
+    <<constructor>> kamarDeluxe(nama :String,lokasi :String,harga :double,termasukWifi :boolean)
+    + inisiasiKetersediaan() : void
+    + tampilKetersediaan()   :void
+
+}
+class pengunjungHotel{
+    + nama :String
+    + ttl :String
+    + nikKtp :int
+    + alamatTinggalSaatIni :String
+    + nomorHp :int
+    <<constructor>> pengunjungHotel(nama :String,ttl :String,nikKtp :int,alamatTinggalSaatIni :String,nomorHp :int)
+    +getNama() :String
+    +getTtl():String
+    +getNikKtp():int
+    +getAlamatTinggalSaatIni():String
+    +gerNomorHp():int
+
+}
+fitur <|.. hotel
+
+aplikasiPemesanHotel *-- hotel
+hotel *-- pengunjungHotel
+hotel ^-- kamarDeluxe
+hotel ^-- kamarVip
+hotel ^-- kamarSuperior
+
+@enduml
